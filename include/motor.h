@@ -12,9 +12,9 @@ public:
   void setSpeed(uint16_t speed);
   void setDirection(bool newDir);
   uint16_t getPeriod();
-  uint16_t getSteps();
+  uint16_t getSpeed();
   void setPeriod(uint16_t newPeriod);
-  void setSteps(uint16_t newSteps);
+  void setFrequency(uint16_t newFreq);
  // void applySpeed();
 
 private:

@@ -1,7 +1,7 @@
 #include <display.h>
-Adafruit_PCD8544 display = Adafruit_PCD8544(Clk_PIN, Din_PIN, DC_PIN, CE_PIN, RST_PIN);
+//Adafruit_PCD8544 display = Adafruit_PCD8544(Clk_PIN, Din_PIN, DC_PIN, CE_PIN, RST_PIN);
 
-display::display(uint8_t SCK, uint8_t MOSI, uint8_t DC, uint8_t RST, uint8_t CS){
+Display::Display(uint8_t SCK, uint8_t MOSI, uint8_t DC, uint8_t RST, uint8_t CS){
     this->SCK = SCK;
     this->MOSI = MOSI;
     this->DC = DC;
@@ -11,7 +11,7 @@ display::display(uint8_t SCK, uint8_t MOSI, uint8_t DC, uint8_t RST, uint8_t CS)
 }
 
 // макросы
-
+/*
 void setupDisplay(){
     display.begin();
     display.clearDisplay();
@@ -19,10 +19,26 @@ void setupDisplay(){
     
     display.setContrast(50); // установка контраста
     delay(1000);
-    display.setTextSize(2);  // установка размера шрифта
+    display.setTextSize(1);  // установка размера шрифта
     display.setTextColor(BLACK); // установка цвета текста
     display.setCursor(0,0); // установка позиции курсора
   
-    display.println("Net ti");
+    display.println("Nu privet");
     display.display();
+}
+*/
+void Display::setShaftData(String newData){
+
+}
+
+void Display::setSlicerData(String newData){
+
+}
+
+void Display::setShaftData(uint16_t newData){
+
+}
+
+void Display::setSlicerData(uint16_t newData){
+
 }
