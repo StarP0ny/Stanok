@@ -1,7 +1,7 @@
 #include <main.h>
 uint16_t periodCounter = 0, stepsCounter = 0;
 
-const uint16_t turboSpeed = 1023;
+const uint16_t turboSpeed = 1023u;
 const uint8_t minSpeed = 0;
 
 Motor shaftMotor(MOTOR_SHAFT_PUL_PIN, DEFAULT_PWM);
@@ -55,7 +55,8 @@ ISR(TIMER2_B){    //D3
 void loop() {
   // put your main code here, to run repeatedly:
   if (SHAFT_START_SWITCH_PIN and !SHAFT_TURBO_BUTTON_PIN){
-    shaftMotor.setSpeed((uint16_t) analogRead(SHAFT_SPEED_RESISTOR_PIN));
+    shaftMotor.setSpeed((uint16_t) analogRead(SHAFT_SPEED_RESISTOR_PIN) +
+                        (uint16_t) analogRead(SHAFT_SPD_FINE_TUNE_RES_PIN)/SHAFT_KOEF_FINE_TUNE);
     display.setShaftData(shaftMotor.getSpeed());
   } 
   else if (SHAFT_TURBO_BUTTON_PIN){
@@ -68,9 +69,10 @@ void loop() {
   }
 
   if (SLICER_START_SWITCH_PIN and !SLICER_TURBO_BUTTON_PIN){
-    slicerMotor.setSpeed((uint16_t) analogRead(SLICER_SPEED_RESISTOR_PIN));
-
+    slicerMotor.setSpeed((uint16_t) analogRead(SLICER_SPEED_RESISTOR_PIN) +
+                         (uint16_t) analogRead(SLICER_SPD_FINE_TUNE_RES_PIN)/SLICER_KOEF_FINE_TUNE);
   }
+
   else if (SLICER_TURBO_BUTTON_PIN){
     slicerMotor.setSpeed(turboSpeed);
 
