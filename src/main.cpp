@@ -59,6 +59,7 @@ void loop() {
                         (uint16_t) analogRead(SHAFT_SPD_FINE_TUNE_RES_PIN)/SHAFT_KOEF_FINE_TUNE);
     display.setShaftData(shaftMotor.getSpeed());
   } 
+  
   else if (SHAFT_TURBO_BUTTON_PIN){
     shaftMotor.setSpeed(turboSpeed);
 
