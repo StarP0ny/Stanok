@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "filters.h"
 
 const int NUM_READ = 10;  // количество усреднений для средних арифм. фильтров
 
