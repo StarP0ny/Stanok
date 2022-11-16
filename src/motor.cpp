@@ -4,30 +4,30 @@
 
 //#define SERVICE
 
-Motor::Motor(uint8_t MOTOR_PIN_STEP, uint8_t MOTOR_PIN_DIR,  bool direction, uint16_t PWM_FREQUENCY) {
+Motor::Motor(uint8_t MOTOR_PIN_STEP, uint8_t MOTOR_PIN_DIR,  bool direction, uint16_t pwmFrequency) {
   this->MOTOR_PIN_STEP = MOTOR_PIN_STEP;
   this->MOTOR_PIN_DIR = MOTOR_PIN_DIR;
   this->direction = direction;
-  this->PWM_FREQUENCY = PWM_FREQUENCY;
+  this->pwmFrequency = pwmFrequency;
 }
 
-Motor::Motor(uint8_t MOTOR_PIN_STEP, uint16_t PWM_FREQUENCY) {
+Motor::Motor(uint8_t MOTOR_PIN_STEP, uint16_t pwmFrequency) {
   this->MOTOR_PIN_STEP = MOTOR_PIN_STEP;
-  this->PWM_FREQUENCY = PWM_FREQUENCY;
+  this->pwmFrequency = pwmFrequency;
 }
 
 
 void Motor::setSpeed(uint16_t newSpeed) {
-  currentSpeed = newSpeed;
+  currentSpeed = newSpeed*kSpeed;
   if (currentSpeed == 0){
     stop();
     return;
   }
-
+  pwmFrequency = round (newSpeed * kSpeed);
   switch (MOTOR_PIN_STEP)
     {
     case 3:
-      Timer2.setFrequency(PWM_FREQUENCY);
+      Timer2.setFrequency(pwmFrequency);
       Timer2.outputEnable(CHANNEL_B, TOGGLE_PIN);
       //Timer2.enableISR(CHANNEL_B);
       break;
@@ -41,19 +41,19 @@ void Motor::setSpeed(uint16_t newSpeed) {
       break;
 
     case 9:
-      Timer1.setFrequency(PWM_FREQUENCY);
+      Timer1.setFrequency(pwmFrequency);
       Timer1.outputEnable(CHANNEL_A, TOGGLE_PIN);
       //Timer1.enableISR(CHANNEL_A);
       break;
       
     case 10:
-      Timer1.setFrequency(PWM_FREQUENCY);
+      Timer1.setFrequency(pwmFrequency);
       Timer1.outputEnable(CHANNEL_B, TOGGLE_PIN);
       //Timer1.enableISR(CHANNEL_B);
       break;
 
     case 11:
-      Timer2.setFrequency(PWM_FREQUENCY);
+      Timer2.setFrequency(pwmFrequency);
       Timer2.outputEnable(CHANNEL_A, TOGGLE_PIN);
       break;
     }
@@ -73,7 +73,7 @@ void Motor::setPeriod(uint16_t newPeriod){
 }
 
 void Motor::setFrequency(uint16_t newFreq){
-  PWM_FREQUENCY = newFreq*KOEF_FREQ;
+  pwmFrequency = newFreq*KOEF_FREQ;
 }
 
 void Motor::stop(){

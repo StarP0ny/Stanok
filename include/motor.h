@@ -6,8 +6,8 @@
 class Motor {
 public:
 
-  Motor(uint8_t MOTOR_PIN_STEP, uint8_t MOTOR_PIN_DIR,  bool direction, uint16_t PWM_FREQUENCY);
-  Motor(uint8_t MOTOR_PIN_STEP, uint16_t PWM_FREQUENCY);
+  Motor(uint8_t MOTOR_PIN_STEP, uint8_t MOTOR_PIN_DIR,  bool direction, uint16_t pwmFrequency);
+  Motor(uint8_t MOTOR_PIN_STEP, uint16_t pwmFrequency);
   void stop();
   void setSpeed(uint16_t speed);
   void setDirection(bool newDir);
@@ -18,7 +18,7 @@ public:
  // void applySpeed();
 
 private:
-  uint16_t PWM_FREQUENCY = DEFAULT_PWM;
+  uint16_t pwmFrequency = DEFAULT_PWM;
   uint16_t currentPeriod = 0;
   uint16_t currentSpeed = 0;
   uint8_t MOTOR_PIN_DIR;
